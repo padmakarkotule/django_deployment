@@ -1,3 +1,16 @@
+# Set the base image to nginx. Use an official Nginx image. (Here used base image nginx:latest version).
 FROM nginx:latest
+
+# File Author / Maintainer
+MAINTAINER Padmakar Kotule
+
+# Remove default nginx config file.
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./dockerfile/ngnix/djangoproject.conf /etc/nginx/conf.d/
+
+# Copy djangoproject.conf /etc/nginx/conf.d/
+COPY ./ui_service.conf /etc/nginx/conf.d/
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+
