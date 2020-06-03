@@ -1,0 +1,22 @@
+# Set the base image to Python. Use an official Python image. (Here used base image python:3.7.4-alpine).
+# Install Django==3.0.4 and gunicorn==20.0.4
+FROM python:3.7.4-alpine
+
+# File Author / Maintainer
+MAINTAINER Padmakar Kotule
+
+# set where to place files in container. e.g. ENV CONTAINER_HOME=/opt or ENV CONTAINER_HOME=/app
+ENV CONTAINER_HOME=/opt
+
+# Set the working directory E.g. you can set as /app or /opt etc.
+# WORKDIR /app or WORKDIR=/opt
+WORKDIR $CONTAINER_HOME
+
+# Create application subdirectories e.g. for to keep log files create dir logs
+# Or mount volume for log directory and configuration directory
+RUN mkdir $CONTAINER_HOME/logs
+RUN mkdir $CONTAINER_HOME/configs
+
+# Install Python dependencies and packages
+COPY ./requirements.txt $CONTAINER_HOME/
+RUN pip install -r $CONTAINER_HOME/requirements.txt
